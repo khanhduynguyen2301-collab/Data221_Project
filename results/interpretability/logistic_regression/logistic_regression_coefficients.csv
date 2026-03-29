@@ -1,0 +1,76 @@
+class,feature,coefficient
+Insomnia,numeric__Age,0.5708718175859282
+Insomnia,numeric__Sleep Duration,-0.8312538275283712
+Insomnia,numeric__Quality of Sleep,-0.39576757445123817
+Insomnia,numeric__Physical Activity Level,0.13059421808936786
+Insomnia,numeric__Stress Level,-0.11308406299508465
+Insomnia,numeric__Heart Rate,-0.43758967645190167
+Insomnia,numeric__Daily Steps,-0.5753053807849582
+Insomnia,numeric__Systolic BP,0.4195419609945272
+Insomnia,numeric__Diastolic BP,0.17199422247377374
+Insomnia,categorical__Gender_Female,-0.21530675768265362
+Insomnia,categorical__Gender_Male,0.1988187635833101
+Insomnia,categorical__Occupation_Accountant,1.1587769393523293
+Insomnia,categorical__Occupation_Doctor,-0.44046915770374556
+Insomnia,categorical__Occupation_Engineer,0.5022882672576295
+Insomnia,categorical__Occupation_Lawyer,-0.0011319593195479082
+Insomnia,categorical__Occupation_Manager,-0.11187793881459673
+Insomnia,categorical__Occupation_Nurse,-1.201866548912644
+Insomnia,categorical__Occupation_Sales Representative,-0.6651711941505629
+Insomnia,categorical__Occupation_Salesperson,0.8257408253326323
+Insomnia,categorical__Occupation_Scientist,-0.48879757032070725
+Insomnia,categorical__Occupation_Software Engineer,0.041156783053790606
+Insomnia,categorical__Occupation_Teacher,0.36486356012608073
+Insomnia,categorical__BMI Category_Normal,0.07310004613162353
+Insomnia,categorical__BMI Category_Obese,0.09876347976767373
+Insomnia,categorical__BMI Category_Overweight,-0.18835151999864178
+None,numeric__Age,-0.3572392769314321
+None,numeric__Sleep Duration,-0.05188380353375113
+None,numeric__Quality of Sleep,0.33594455583084964
+None,numeric__Physical Activity Level,0.14662657619996292
+None,numeric__Stress Level,0.011084387744664746
+None,numeric__Heart Rate,-0.4014060771852959
+None,numeric__Daily Steps,-0.0014121454945767173
+None,numeric__Systolic BP,-0.2724390682922531
+None,numeric__Diastolic BP,-0.7148084649279207
+None,categorical__Gender_Female,0.032640346641545186
+None,categorical__Gender_Male,-0.012318705415708113
+None,categorical__Occupation_Accountant,-0.6186781684343033
+None,categorical__Occupation_Doctor,0.5236903235517825
+None,categorical__Occupation_Engineer,0.14224382063390992
+None,categorical__Occupation_Lawyer,0.37138922821360804
+None,categorical__Occupation_Manager,0.28817098687405607
+None,categorical__Occupation_Nurse,0.1837709892425353
+None,categorical__Occupation_Sales Representative,-0.026880524733166922
+None,categorical__Occupation_Salesperson,-0.6843113157581515
+None,categorical__Occupation_Scientist,0.48104387154439715
+None,categorical__Occupation_Software Engineer,0.3107650561144892
+None,categorical__Occupation_Teacher,-0.9508826260233199
+None,categorical__BMI Category_Normal,0.24168095244994145
+None,categorical__BMI Category_Obese,-0.2621629138274431
+None,categorical__BMI Category_Overweight,0.040803602603338616
+Sleep Apnea,numeric__Age,-0.2136325406544974
+Sleep Apnea,numeric__Sleep Duration,0.8831376310621255
+Sleep Apnea,numeric__Quality of Sleep,0.059823018620393735
+Sleep Apnea,numeric__Physical Activity Level,-0.27722079428933194
+Sleep Apnea,numeric__Stress Level,0.10199967525041989
+Sleep Apnea,numeric__Heart Rate,0.8389957536371939
+Sleep Apnea,numeric__Daily Steps,0.5767175262795349
+Sleep Apnea,numeric__Systolic BP,-0.14710289270227456
+Sleep Apnea,numeric__Diastolic BP,0.542814242454145
+Sleep Apnea,categorical__Gender_Female,0.1826664110411099
+Sleep Apnea,categorical__Gender_Male,-0.18650005816760368
+Sleep Apnea,categorical__Occupation_Accountant,-0.5400987709180254
+Sleep Apnea,categorical__Occupation_Doctor,-0.08322116584803681
+Sleep Apnea,categorical__Occupation_Engineer,-0.6445320878915408
+Sleep Apnea,categorical__Occupation_Lawyer,-0.37025726889406047
+Sleep Apnea,categorical__Occupation_Manager,-0.17629304805945922
+Sleep Apnea,categorical__Occupation_Nurse,1.0180955596701107
+Sleep Apnea,categorical__Occupation_Sales Representative,0.6920517188837292
+Sleep Apnea,categorical__Occupation_Salesperson,-0.141429509574481
+Sleep Apnea,categorical__Occupation_Scientist,0.0077536987763103336
+Sleep Apnea,categorical__Occupation_Software Engineer,-0.3519218391682803
+Sleep Apnea,categorical__Occupation_Teacher,0.586019065897239
+Sleep Apnea,categorical__BMI Category_Normal,-0.31478099858156494
+Sleep Apnea,categorical__BMI Category_Obese,0.16339943405976942
+Sleep Apnea,categorical__BMI Category_Overweight,0.14754791739530185

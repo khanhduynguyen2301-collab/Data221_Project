@@ -1,0 +1,1 @@
+{"classifier__C": 1, "classifier__class_weight": null, "classifier__max_iter": 2000, "classifier__penalty": "l2", "classifier__solver": "lbfgs"}
