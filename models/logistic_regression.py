@@ -50,3 +50,16 @@ param_grid = {
     "classifier__max_iter": [2000]
 }
 
+def tune_model(logistic_regression_pipeline_model, param_grid, X_train, y_train):
+    cross_validation = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+
+    grid = GridSearchCV(
+        logistic_regression_pipeline_model,
+        param_grid = param_grid,
+        cv = cross_validation,
+        scoring = "recall_macro",
+    )
+
+    grid.fit(X_train, y_train)
+    return grid
+
