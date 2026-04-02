@@ -78,7 +78,7 @@ def evaluate_model(best_model, X_test, y_test):
     cm = confusion_matrix(y_test, y_pred)
 
     metrics = {
-        'model': MODEL_NAME,
+        'Model': MODEL_NAME,
         'accuracy': accuracy_score(y_test, y_pred),
         'precision_macro': precision_score(y_test, y_pred, average="macro", zero_division=0),
         'recall_macro': recall_score(y_test, y_pred, average="macro", zero_division=0),
@@ -90,8 +90,36 @@ def evaluate_model(best_model, X_test, y_test):
     return metrics, cm, classes, report
 
 def save_best_params(best_params):
-    with open("../results/tuning/logistic_regression_best_params.json", "w", encoding="utf-8") as file:
+    with open("../results/tuning/logistic_regression/logistic_regression_best_params.json", "w", encoding="utf-8") as file:
         json.dump(best_params, file)
+
+def save_tuning_plot(grid):
+    result_df = pd.DataFrame(grid.cv_results_)
+    plot = result_df[[
+        "param_classifier__C",
+        "param_classifier__class_weight",
+        "param_classifier__solver",
+        "mean_test_score",
+        "rank_test_score",
+    ]].copy()
+
+    plot["param_classifier__C"] = plot["param_classifier__C"].astype(float)
+    plot = plot.sort_values("param_classifier__C")
+
+    plt.figure(figsize=(10, 6))
+    grouped = plot.groupby(["param_classifier__class_weight", "param_classifier__solver"])
+
+    for (class_weight, solver), group in grouped:
+        label = f"class_weight = {class_weight}, solver = {solver}"
+        plt.plot(group["param_classifier__C"], group["mean_test_score"], marker = "o", label=label)
+        plt.xscale("log")
+        plt.xlabel("C (log scale)")
+        plt.ylabel("Mean CV Score")
+        plt.title("Logistic Regression Tuning: C vs Mean CV Score")
+        plt.legend(fontsize = 8)
+        plt.tight_layout()
+        plt.savefig("../results/tuning/logistic_regression/logistic_regression_c_vs_score.png", dpi=300, bbox_inches="tight")
+        plt.close()
 
 def save_metrics(metrics):
     pd.DataFrame([metrics]).to_csv(
@@ -108,11 +136,60 @@ def save_confusion_matrix(cm, classes):
     plt.savefig("../results/figures/logistic_regression_confusion_matrix.png", dpi=300)
     plt.close(fig)
 
+def clean_feature_names(feature_names):
+    cleaned = []
+    for name in feature_names:
+        name = name.replace("numeric__", "")
+        name = name.replace("categorical__", "")
+        name = name.replace("remainder__", "")
+        cleaned.append(name)
+    return cleaned
+
+def save_logistic_regression_equations(best_model):
+    preprocess = best_model.named_steps["preprocessor"]
+    classifier = best_model.named_steps["classifier"]
+
+    feature_names = preprocess.get_feature_names_out()
+    feature_names = clean_feature_names(feature_names)
+
+    classes = classifier.classes_
+    coef_matrix = classifier.coef_
+    intercepts = classifier.intercept_
+
+    rows = []
+
+    with open("../results/interpretability/logistic_regression/logistic_regression_equations.txt", "w", encoding="utf-8") as f:
+        for class_index, class_name in enumerate(classes):
+            intercept = intercepts[class_index]
+            coefficients = coef_matrix[class_index]
+
+            # Build equation string
+            terms = [f"{intercept:.6f}"]
+            for coef, feature in zip(coefficients, feature_names):
+                sign = "+" if coef >= 0 else "-"
+                terms.append(f" {sign} {abs(coef):.6f}*({feature})")
+
+                rows.append({
+                    "class": class_name,
+                    "intercept": intercept,
+                    "feature": feature,
+                    "coefficient": coef
+                })
+
+            equation = f"z_{class_name} = " + "".join(terms)
+
+            f.write(f"Class: {class_name}\n")
+            f.write(equation + "\n\n")
+
+
+    print(f"Saved equations text file to: logistic_regression_equations.txt")
+
 def save_coefficients(best_model):
     preprocess = best_model.named_steps["preprocessor"]
     classifier = best_model.named_steps["classifier"]
 
     feature_names = preprocess.get_feature_names_out()
+    feature_names = clean_feature_names(feature_names)
     coef_matrix = classifier.coef_
     classes = classifier.classes_
 
@@ -133,6 +210,8 @@ def save_coefficient_plot(best_model):
     classifier = best_model.named_steps["classifier"]
 
     feature_names = preprocess.get_feature_names_out()
+    feature_names = clean_feature_names(feature_names)
+
     coef_matrix = classifier.coef_
     classes = classifier.classes_
 
@@ -167,8 +246,10 @@ def main():
     metrics, cm, classes, report = evaluate_model(best_model, X_test, y_test)
 
     save_best_params(best_params)
+    save_tuning_plot(grid)
     save_metrics(metrics)
     save_confusion_matrix(cm, classes)
+    save_logistic_regression_equations(best_model)
     save_coefficients(best_model)
     save_coefficient_plot(best_model)
 
